@@ -1,0 +1,155 @@
+html, body { 
+	font-family: 'Varela Round', sans-serif; 
+	height: 100%; 
+	margin: 0; 
+	padding: 0; 
+	min-width: 900px; 
+	font-size: 14px; 
+	line-height: 1.4;
+}
+
+.header {
+	height: 80px; 
+	background: #f0f0f0;
+}
+
+.top_sec { 
+	padding: 65px 0;
+	margin: auto;
+	background-color: #babcbe;
+}
+
+.fileContainer{
+	width: 800px; 
+	background-color: #E5E6E8; 
+	border: 50px #e5e6e7 solid; 
+	margin: 0 auto; 
+}
+
+.frmUpload {
+	width: 797px; 
+	border-bottom: none; 
+	display: inline-block;
+}
+
+.inputfile {
+	width: 589px;
+	height: 60px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	cursor: pointer;
+}
+
+.inputfile:focus {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.field {
+	width: 587px;
+	margin-right: 10px;
+	text-align: center;
+	height: 60px;
+	border: none;
+	color: #241f20;
+	background: #fff;
+	font-size: 20px;
+	line-height: 60px;
+    display: inline-block;	
+}
+
+.browse {
+	width: 184px;
+	padding: 0 8px;
+	text-align: center;
+	height: 60px;
+	border: none;
+	color: #fff;
+	background: #241f20;
+	font-size: 20px;
+	line-height: 60px;
+    display: inline-block;
+}
+
+.browse:hover {
+	background: #babcbe;
+	color: #241f20;
+}
+
+label:before {
+	display: none;
+}
+
+.parse {
+	display: block;
+	margin: auto;
+	margin-top: 10px;
+	width: 797px;
+	height: 60px;
+	border: none;
+	color: #fff;
+	background: #241f20;
+	font-size: 20px;
+}
+.parse:hover {
+	background: #babcbe;
+	color: #241f20;
+}
+
+.file_btn {
+	color: #fff;
+	background: #241f20;
+}
+.file_btn:hover { background: #babcbe; color: #241f20;}
+
+.transition-background {
+	-webkit-transition:background 0.2s;
+	-moz-transition:background 0.2s;
+	-o-transition:background 0.2s;
+	transition:background 0.2s;	
+}
+
+h1 {
+	margin: 20px;
+}
+
+.about { width: 900px; margin: auto;}
+
+.description {
+	width: 797px;
+	margin: 20px auto;
+}
+
+.message {
+	position: absolute;
+	width: 750px;
+	height: 70px;
+	right: 0;
+	left: 0;
+	margin: 95px auto;
+	padding: 50px;
+	color: white;
+	background: #241f20;
+	opacity: 0.75;
+	text-align: center;
+	font-size: 22px;
+	cursor: pointer;
+	z-index: 10;
+}
+#message:hover {
+	background: #000;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+p a {
+	color: #000;
+}
+
+p a:hover {
+	color: #babcbe;
+}

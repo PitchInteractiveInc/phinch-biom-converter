@@ -1,0 +1,7 @@
+WebOb
+Paste
+webapp2
+numpy
+biom-format
+tables
+h5py
