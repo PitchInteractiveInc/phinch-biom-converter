@@ -119,6 +119,7 @@ class UploadHandler(webapp2.RequestHandler):
 						self.response.headers['Content-Type'] = 'application/json';
 						self.response.headers['Content-Disposition'] = 'attachment; filename=%s' % f['filename']
 						self.response.out.write(json)
+						h5_file.close()
 						message = initmessage
 			else: 
 				message = '<div id="message"><a href="/clear"><div class="message" class="transition-background">That file doesn\'t use the HDF5 format</div></a></div>'
