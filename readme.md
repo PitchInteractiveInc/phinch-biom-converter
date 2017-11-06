@@ -43,6 +43,10 @@ Then, activate the virtual environment.
 
 `source ./phin/bin/activate`
 
+Install numpy.
+
+`pip install numpy`
+
 After that, install the dependencies in requirements.txt using pip.
 
 `pip install -r requirements.txt`
