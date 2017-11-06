@@ -1,4 +1,4 @@
-import  webapp2, os, mimetypes, h5py, tempfile, contextlib, convert
+import  webapp2, os, mimetypes, h5py, tempfile, contextlib, convert, gc
 
 htmlstart = """
 	<!DOCTYPE html>
@@ -124,6 +124,7 @@ class UploadHandler(webapp2.RequestHandler):
 			else: 
 				message = '<div id="message"><a href="/clear"><div class="message" class="transition-background">That file doesn\'t use the HDF5 format</div></a></div>'
 				self.redirect('/')
+		gc.collect();
 
 app = webapp2.WSGIApplication([
 	('/', HomeHandler),
