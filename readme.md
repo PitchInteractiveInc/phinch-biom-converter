@@ -1,8 +1,8 @@
-#Phinch HDF5 to JSON BIOM Converter
+# Phinch HDF5 to JSON BIOM Converter
 
 ***
 
-##Which BIOM Files Work With Phinch?
+## Which BIOM Files Work With Phinch?
 
 [Phinch](http://phinch.org/) works with [BIOM](http://biom-format.org/) file type 1.0, which is formatted as JSON. This is the file format produced by [QIIME](http://qiime.org/) version 1.8 and earlier. If you're using a newer version of [QIIME](https://qiime2.org/), it will produce [BIOM](http://biom-format.org/) file type 2.1, which is formatted as HDF5.
 
@@ -14,7 +14,7 @@ Alternatively, you can use [this web-based tool](http://link-to-the-tool-tk.com)
 
 ***
 
-##Using This Tool on the Web
+## Using This Tool on the Web
 
 * First, load [this conversion tool](http://link-to-the-tool-tk.com) in your web browser.
 * Second, drag your HDF5 BIOM file to the area labeled *Drop File Here* or select *Browse* to select it from the file picker.
@@ -25,7 +25,7 @@ Alternatively, you can use [this web-based tool](http://link-to-the-tool-tk.com)
 
 ***
 
-##Running This Tool Yourself
+## Running This Tool Yourself
 
 If you'd like to run this tool locally, first, clone this repository.
 
