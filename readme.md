@@ -45,7 +45,7 @@ Then, activate the virtual environment.
 
 After that, install the dependencies in requirements.txt using pip.
 
-`pip install requirements.txt`
+`pip install -r requirements.txt`
 
 Finally, run main.py to start the server and load the resulting address in your browser of choice.
 
