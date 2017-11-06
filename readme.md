@@ -10,13 +10,13 @@ It's possible to convert the HDF5 tables into JSON tables using recent versions 
 
 `biom convert -i otu_table.biom -o otu_table_json.biom --table-type="OTU table" --to-json`
 
-Alternatively, you can use [this web-based tool](http://link-to-the-tool-tk.com) to convert an HDF5-formatted [BIOM](http://biom-format.org/) file to a JSON-formatted [BIOM](http://biom-format.org/) file that will work with [Phinch](http://phinch.org/).
+Alternatively, you can use [this web-based tool](http://phinchconversion.pitchinteractive.com/) to convert an HDF5-formatted [BIOM](http://biom-format.org/) file to a JSON-formatted [BIOM](http://biom-format.org/) file that will work with [Phinch](http://phinch.org/).
 
 ***
 
 ## Using This Tool on the Web
 
-* First, load [this conversion tool](http://link-to-the-tool-tk.com) in your web browser.
+* First, load [this conversion tool](http://phinchconversion.pitchinteractive.com/) in your web browser.
 * Second, drag your HDF5 BIOM file to the area labeled *Drop File Here* or select *Browse* to select it from the file picker.
 * Third, click the button labeled *Convert File* and wait for an Open/Save dialog box to appear.
 * Then, choose a name and location for your new converted file.
@@ -29,15 +29,19 @@ Alternatively, you can use [this web-based tool](http://link-to-the-tool-tk.com)
 
 If you'd like to run this tool locally, first, clone this repository.
 
-`git clone https://github.com/PitchInteractive/TKTK`
+`git clone https://github.com/PitchInteractive/phinch-biom-converter`
+
+Then, enter the new directory.
+
+`cd phinch-biom-converter/`
 
 Next, setup a virtual environment in Python. In this case I've named the environment "phin".
 
-`setup virtualenv {phin}`
+`virtualenv phin`
 
 Then, activate the virtual environment.
 
-`source ./{phin}/bin/activate`
+`source ./phin/bin/activate`
 
 After that, install the dependencies in requirements.txt using pip.
 
