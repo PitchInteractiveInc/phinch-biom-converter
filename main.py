@@ -10,10 +10,12 @@ htmlstart = """
 		<link rel="stylesheet" href="static/utility.css">
 		<link rel="stylesheet" href="static/style.css">
 	</head>
+
 	<div class="header">
 		<a href="http://phinch.org/" target="_blank">
 			<p class="logo">
-				<img src="/static/phinch.png" height="50px">
+				<img src="static/phinch.png" height="50px">
+				<img src="static/loading.gif" style="width:0%;height:0%;">
 			</p>
 		</a>
 	</div>
@@ -39,7 +41,7 @@ htmlend = """
 		<p class="description" style="background:#E5E6E8; text-align:center;"><code>biom convert -i otu_table.biom -o otu_table_json.biom --table-type="OTU table" --to-json</code></p>
 		<p class="description">Alternatively, you can use <a href="http://link-to-the-tool-tk.com">this web-based tool</a> to convert an HDF5-formatted <a href="http://biom-format.org/">BIOM</a> file to a JSON-formatted <a href="http://biom-format.org/">BIOM</a> file that will work with <a href="http://phinch.org/">Phinch</a>.</p>
 		<a href="http://phinch.org/" target="_blank">
-			<button class="parse transition-background file_btn">RETURN TO PHINCH</button>
+			<button class="parse transition-background file_btn">RETURN TO UPLOAD THE CONVERTED FILE</button>
 		</a>
 	</div>
 	<script type="text/javascript">
@@ -57,8 +59,7 @@ htmlend = """
 		});
 		function showMessage() {
 			var message = document.querySelector ( '#message' );
-			message.outerHTML = '<div id="message" class="message transition-background">Converting...</div>'
-			//<a href="/clear"></a>
+			message.outerHTML = '<div id="message" class="message transition-background">Converting... <img src="static/loading.gif"></div>'
 			return true;
 		}
 	</script>
@@ -70,7 +71,7 @@ class HomeHandler(webapp2.RequestHandler):
 	def get(self):
 		global message
 		html = htmlstart + message + htmlend;
-		self.response.write(html)
+		self.response.out.write(html)
 
 class ClearHandler(webapp2.RequestHandler):
 	def get(self):
@@ -86,8 +87,8 @@ class StaticFileHandler(webapp2.RequestHandler):
             return
         try:
             f = open(abs_path, 'r')
-            self.response.headers.add_header('Content-Type', mimetypes.guess_type(abs_path)[0])
-            self.response.out.write(f.read())
+            self.response.headers['Content-Type'] = mimetypes.guess_type(abs_path)[0];
+            self.response.write(f.read())
             f.close()
         except:
             self.response.set_status(404)
@@ -99,6 +100,7 @@ class UploadHandler(webapp2.RequestHandler):
 		_files = [{'content': f.file.read(), 'filename': f.filename} for f in files if f is not u'']
 		if len(_files) < 1:
 			message = initmessage
+			message = '<div id="message"><a href="/clear"><div class="message" class="transition-background">No file selected!</div></a></div>'
 			self.redirect('/')
 		for f in _files:
 			if f['content'][0:8] == b'\x89HDF\r\n\x1a\n':
@@ -116,9 +118,8 @@ class UploadHandler(webapp2.RequestHandler):
 						json = convert.tojson(h5_file)
 						self.response.headers['Content-Type'] = 'application/json';
 						self.response.headers['Content-Disposition'] = 'attachment; filename=%s' % f['filename']
-						self.response.write(json)
+						self.response.out.write(json)
 						message = initmessage
-						# self.redirect('/')
 			else: 
 				message = '<div id="message"><a href="/clear"><div class="message" class="transition-background">That file doesn\'t use the HDF5 format</div></a></div>'
 				self.redirect('/')
@@ -132,7 +133,8 @@ app = webapp2.WSGIApplication([
 
 def main():
 	from paste import httpserver
-	httpserver.serve(app, host='127.0.0.1', port='8080')
+	httpserver.serve(app, host='0.0.0.0', port='8080')
+	# httpserver.serve(app, host='127.0.0.1', port='8080')
 
 if __name__ == '__main__':
 	main()

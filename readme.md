@@ -14,7 +14,18 @@ Alternatively, you can use [this web-based tool](http://link-to-the-tool-tk.com)
 
 ***
 
-##Running This Tool
+##Using This Tool on the Web
+
+* First, load [this conversion tool](http://link-to-the-tool-tk.com) in your web browser.
+* Second, drag your HDF5 BIOM file to the area labeled *Drop File Here* or select *Browse* to select it from the file picker.
+* Third, click the button labeled *Convert File* and wait for an Open/Save dialog box to appear.
+* Then, choose a name and location for your new converted file.
+* Finally, open [Phinch](http://phinch.org/) and upload your new JSON-formatted BIOM file.
+
+
+***
+
+##Running This Tool Yourself
 
 If you'd like to run this tool locally, first, clone this repository.
 
