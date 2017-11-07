@@ -1,4 +1,4 @@
-import  webapp2, os, mimetypes, h5py, tempfile, contextlib, convert, gc
+import  webapp2, os, mimetypes, h5py, tempfile, contextlib, convert
 
 htmlstart = """
 	<!DOCTYPE html>
@@ -104,27 +104,43 @@ class UploadHandler(webapp2.RequestHandler):
 			self.redirect('/')
 		for f in _files:
 			if f['content'][0:8] == b'\x89HDF\r\n\x1a\n':
-				file_access_property_list = h5py.h5p.create(h5py.h5p.FILE_ACCESS)
-				file_access_property_list.set_fapl_core(backing_store=False)
-				file_access_property_list.set_file_image(f['content'])
-				file_id_args = {
-					'fapl': file_access_property_list,
-					'flags': h5py.h5f.ACC_RDONLY,
-					'name': next(tempfile._get_candidate_names()).encode(),
-				}
-				h5_file_args = {'backing_store': False, 'driver': 'core', 'mode': 'r'}
-				with contextlib.closing(h5py.h5f.open(**file_id_args)) as file_id:
-					with h5py.File(file_id, **h5_file_args) as h5_file:
-						json = convert.tojson(h5_file)
-						self.response.headers['Content-Type'] = 'application/json';
-						self.response.headers['Content-Disposition'] = 'attachment; filename=%s' % f['filename']
-						self.response.out.write(json)
-						h5_file.close()
-						message = initmessage
+				print f['filename']
+				file = open('static/in/' + f['filename'], 'wb')
+				file.write(f['content'])
+				file.close()
+				convert.convert('static/in/' + f['filename'], 'static/out/JSON-' + f['filename'])
+
+				with open('static/out/JSON-' + f['filename'], 'r') as outfile:
+					# print outfile.read()
+					self.response.headers['Content-Type'] = 'application/json';
+					self.response.headers['Content-Disposition'] = 'attachment; filename=%s' % f['filename']
+					self.response.out.write(outfile.read())
+					# self.response.out.write(outfile);
+					# outfile.close()
+
+
+				# filelinks = filelinks + '<div><a href="' + 'static/out/JSON-' + f['filename'] + '" target="_blank" download><button>Download ' + 'JSON-' + f['filename'] + ' Here</button></a></div>'
+
+				# file_access_property_list = h5py.h5p.create(h5py.h5p.FILE_ACCESS)
+				# file_access_property_list.set_fapl_core(backing_store=False)
+				# file_access_property_list.set_file_image(f['content'])
+				# file_id_args = {
+				# 	'fapl': file_access_property_list,
+				# 	'flags': h5py.h5f.ACC_RDONLY,
+				# 	'name': next(tempfile._get_candidate_names()).encode(),
+				# }
+				# h5_file_args = {'backing_store': False, 'driver': 'core', 'mode': 'r'}
+				# with contextlib.closing(h5py.h5f.open(**file_id_args)) as file_id:
+				# 	with h5py.File(file_id, **h5_file_args) as h5_file:
+				# 		json = convert.tojson(h5_file)
+				# 		self.response.headers['Content-Type'] = 'application/json';
+				# 		self.response.headers['Content-Disposition'] = 'attachment; filename=%s' % f['filename']
+				# 		self.response.out.write(json)
+				# 		message = initmessage
+				# 		h5_file.close()
 			else: 
 				message = '<div id="message"><a href="/clear"><div class="message" class="transition-background">That file doesn\'t use the HDF5 format</div></a></div>'
 				self.redirect('/')
-		gc.collect();
 
 app = webapp2.WSGIApplication([
 	('/', HomeHandler),
@@ -135,7 +151,7 @@ app = webapp2.WSGIApplication([
 
 def main():
 	from paste import httpserver
-	httpserver.serve(app, host='0.0.0.0', port='18181')
+	httpserver.serve(app, host='0.0.0.0', port='81818')
 
 if __name__ == '__main__':
 	main()
